@@ -103,12 +103,6 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:7
 .banner::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 60%,rgba(58,215,255,.18),transparent 80%);background-size:250% 100%;animation:scan 4s linear infinite}
 @keyframes scan{from{background-position:150% 0}to{background-position:-100% 0}}
 
-/* ---------- stats ---------- */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-@media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}}
-.stat{border:1px solid var(--line);border-radius:var(--r);padding:26px;text-align:center;background:var(--bg2)}
-.stat b{font-family:Montserrat;font-weight:900;font-size:2.6rem;display:block}
-.stat span{color:var(--muted)}
 
 /* ---------- catalogo ---------- */
 .cat-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap}
@@ -255,15 +249,6 @@ footer.site{border-top:1px solid var(--line);padding:36px 0;color:var(--muted);t
         <small>Laboratorio de electrónica</small>
       </div>
     </div>
-  </div>
-</section>
-
-<section style="padding-top:0">
-  <div class="wrap stats reveal">
-    <div class="stat"><b class="grad" data-count="1585">0</b><span>seguidores en Instagram</span></div>
-    <div class="stat"><b class="grad" data-count="11">0</b><span>categorías en catálogo</span></div>
-    <div class="stat"><b class="grad" data-count="6">0</b><span>tipos de equipos reparados</span></div>
-    <div class="stat"><b class="grad" data-count="100" data-suffix="%">0</b><span>atención personalizada</span></div>
   </div>
 </section>
 
@@ -455,17 +440,6 @@ const io = new IntersectionObserver(es => es.forEach(e => {
 }), {threshold: .12});
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-const cio = new IntersectionObserver(es => es.forEach(e => {
-  if (!e.isIntersecting) return;
-  const el = e.target, end = +el.dataset.count, suf = el.dataset.suffix || '', t0 = performance.now();
-  const step = t => {
-    const p = reduce ? 1 : Math.min((t - t0) / 1600, 1);
-    el.textContent = Math.round(end * (1 - (1 - p) ** 3)).toLocaleString('es-AR') + suf;
-    if (p < 1) requestAnimationFrame(step);
-  };
-  requestAnimationFrame(step); cio.unobserve(el);
-}), {threshold: .6});
-document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
 
 // maquina de escribir
 const words = ['Reparamos tu PC.', 'Reparamos tu notebook.', 'Reparamos tu celular.', 'Reparamos tu consola.', 'Accesorios al toque.'];
