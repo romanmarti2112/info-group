@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>InfoGroup · Servicio técnico y tecnología en Carrodilla</title>
+<meta name="description" content="InfoGroup: servicio técnico especializado en PC, notebooks, celulares, consolas, TV y audio. Venta de accesorios. San Martín 7978 Local 2, Carrodilla, Luján de Cuyo, Mendoza.">
+<link rel="icon" href="img/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#06080f; --bg2:#0b1020; --card:#10172b; --line:#1d2742;
+  --blue:#2f6bff; --cyan:#3ad7ff; --red:#ff4b3e; --green:#25d366;
+  --text:#e8eeff; --muted:#8c99b8; --r:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+h1,h2,h3{font-family:Montserrat,sans-serif;line-height:1.1}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+.wrap{width:min(1180px,100% - 32px);margin-inline:auto}
+section{padding:100px 0;position:relative}
+.kicker{font-family:"JetBrains Mono",monospace;color:var(--cyan);font-size:.9rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;display:block}
+.kicker::before{content:"> "}
+.h2{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:900;margin-bottom:14px}
+.grad{background:linear-gradient(90deg,var(--cyan),var(--blue) 60%,#8a5cff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:var(--muted);font-size:1.1rem;max-width:620px}
+.btn{display:inline-flex;align-items:center;gap:10px;font-weight:700;padding:14px 24px;border-radius:14px;transition:transform .2s,box-shadow .2s,background .2s}
+.btn:hover{transform:translateY(-3px)}
+.btn-wa{background:var(--green);color:#04210f;box-shadow:0 10px 30px -10px var(--green)}
+.btn-blue{background:var(--blue);color:#fff;box-shadow:0 10px 30px -10px var(--blue)}
+.btn-ghost{border:1px solid var(--line);background:rgba(255,255,255,.03)}
+.btn-ghost:hover{border-color:var(--cyan)}
+.ico{width:20px;height:20px;fill:currentColor;flex:none}
+
+/* ---------- nav ---------- */
+nav{position:fixed;inset:0 0 auto;z-index:50;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+nav.solid{background:rgba(6,8,15,.82);backdrop-filter:blur(14px);border-color:var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:72px;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;font-family:Montserrat;font-weight:900;font-size:1.25rem;letter-spacing:.04em}
+.brand img{width:42px;height:42px;object-fit:cover;object-position:center 38%;border-radius:10px}
+.menu{display:flex;gap:28px;font-weight:500;color:var(--muted)}
+.menu a:hover{color:var(--text)}
+.cart-btn{position:relative;width:46px;height:46px;border-radius:12px;border:1px solid var(--line);display:grid;place-items:center;background:rgba(255,255,255,.03)}
+.cart-btn .n{position:absolute;top:-6px;right:-6px;min-width:22px;height:22px;border-radius:99px;background:var(--red);font-size:.75rem;font-weight:700;display:grid;place-items:center;padding:0 5px;transform:scale(0);transition:transform .25s}
+.cart-btn .n.on{transform:scale(1)}
+.cart-btn.bump{animation:bump .4s}
+@keyframes bump{50%{transform:scale(1.2)}}
+@media(max-width:860px){.menu{display:none}}
+
+/* ---------- hero ---------- */
+.hero{min-height:100vh;display:flex;align-items:center;overflow:hidden;padding:120px 0 80px}
+#circuit{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 70% 40%,transparent 0,var(--bg) 75%);pointer-events:none}
+.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+@media(max-width:900px){.hero .wrap{grid-template-columns:1fr}.hero .chip3d{display:none}}
+.status{display:inline-flex;align-items:center;gap:10px;padding:8px 16px;border-radius:99px;border:1px solid var(--line);background:rgba(255,255,255,.04);font-weight:600;font-size:.9rem;margin-bottom:22px}
+.status i{width:10px;height:10px;border-radius:50%;background:var(--muted)}
+.status.open i{background:var(--green);box-shadow:0 0 0 0 var(--green);animation:ping 1.6s infinite}
+.status.closed i{background:var(--red)}
+@keyframes ping{to{box-shadow:0 0 0 10px transparent}}
+.hero h1{font-size:clamp(2.6rem,6.5vw,5rem);font-weight:900;letter-spacing:-.02em}
+.type{display:block;min-height:1.15em;color:var(--cyan);font-family:"JetBrains Mono",monospace;font-weight:500;font-size:.62em;margin-top:10px}
+.type::after{content:"▋";animation:blink 1s steps(1) infinite;margin-left:4px}
+@keyframes blink{50%{opacity:0}}
+.hero p{color:var(--muted);font-size:1.15rem;margin:22px 0 32px;max-width:540px}
+.ctas{display:flex;gap:12px;flex-wrap:wrap}
+/* chip flotante con el logo */
+.chip3d{perspective:900px;display:grid;place-items:center}
+.chip3d .inner{width:min(380px,100%);aspect-ratio:1;border-radius:32px;position:relative;transform-style:preserve-3d;transition:transform .15s;animation:float 6s ease-in-out infinite}
+.chip3d img{width:100%;height:100%;object-fit:cover;border-radius:32px;border:1px solid var(--line);box-shadow:0 40px 80px -30px rgba(47,107,255,.6),0 0 0 1px rgba(58,215,255,.15)}
+.chip3d .glow{position:absolute;inset:-30px;border-radius:50%;background:radial-gradient(circle,rgba(47,107,255,.35),transparent 65%);z-index:-1;filter:blur(20px)}
+@keyframes float{50%{translate:0 -16px}}
+
+/* ---------- marquee ---------- */
+.marquee{border-block:1px solid var(--line);background:var(--bg2);overflow:hidden;padding:18px 0}
+.track{display:flex;gap:46px;width:max-content;animation:slide 30s linear infinite;font-family:Montserrat;font-weight:800;font-size:1.25rem;color:var(--muted);white-space:nowrap}
+.track span::after{content:"✦";color:var(--blue);margin-left:46px}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* ---------- servicios ---------- */
+.serv{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-top:46px}
+.tilt{background:linear-gradient(160deg,var(--card),var(--bg2));border:1px solid var(--line);border-radius:var(--r);padding:30px;position:relative;overflow:hidden;transform-style:preserve-3d;transition:transform .15s,border-color .3s}
+.tilt:hover{border-color:rgba(58,215,255,.5)}
+.tilt::before{content:"";position:absolute;inset:0;background:radial-gradient(400px circle at var(--mx,50%) var(--my,50%),rgba(58,215,255,.13),transparent 40%);opacity:0;transition:opacity .3s}
+.tilt:hover::before{opacity:1}
+.tilt .em{font-size:2.4rem}
+.tilt h3{font-size:1.3rem;margin:14px 0 8px}
+.tilt p{color:var(--muted)}
+.tilt ul{list-style:none;margin-top:14px;display:flex;flex-wrap:wrap;gap:8px}
+.tilt li{font-size:.82rem;padding:4px 10px;border-radius:99px;background:rgba(47,107,255,.15);color:#b9ccff}
+.banner{margin-top:40px;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);position:relative}
+.banner img{width:100%;height:440px;object-fit:cover;object-position:center 40%}
+.banner-txt{position:absolute;inset:0;z-index:1;padding:clamp(24px,5vw,56px);display:flex;flex-direction:column;justify-content:center;gap:18px;background:linear-gradient(90deg,rgba(6,8,15,.95) 0,rgba(6,8,15,.75) 45%,transparent 80%)}
+.banner-txt h3{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:900;text-transform:uppercase;line-height:.95}
+.banner-txt ul{list-style:none;display:grid;gap:10px;justify-items:start}
+.banner-txt li{border:2px solid rgba(255,255,255,.85);border-radius:99px;padding:6px 18px;font-weight:700;font-family:Montserrat;background:rgba(6,8,15,.4)}
+.banner-txt small{font-family:"JetBrains Mono";color:var(--cyan);letter-spacing:.12em;text-transform:uppercase}
+@media(max-width:600px){.banner img{height:520px}.banner-txt{background:linear-gradient(180deg,rgba(6,8,15,.9),rgba(6,8,15,.6))}}
+.banner::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 60%,rgba(58,215,255,.18),transparent 80%);background-size:250% 100%;animation:scan 4s linear infinite}
+@keyframes scan{from{background-position:150% 0}to{background-position:-100% 0}}
+
+/* ---------- stats ---------- */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{border:1px solid var(--line);border-radius:var(--r);padding:26px;text-align:center;background:var(--bg2)}
+.stat b{font-family:Montserrat;font-weight:900;font-size:2.6rem;display:block}
+.stat span{color:var(--muted)}
+
+/* ---------- catalogo ---------- */
+.cat-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin:34px 0 26px}
+.chip{padding:9px 18px;border-radius:99px;border:1px solid var(--line);color:var(--muted);font-weight:600;transition:all .2s}
+.chip:hover{color:var(--text)}
+.chip.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.search{flex:1;min-width:200px;padding:10px 18px;border-radius:99px;border:1px solid var(--line);background:var(--bg2);color:var(--text);font:inherit}
+.search:focus{outline:2px solid var(--cyan);outline-offset:1px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
+.prod{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:transform .3s,border-color .3s,box-shadow .3s;animation:pop .45s both}
+.prod:hover{transform:translateY(-6px);border-color:rgba(47,107,255,.6);box-shadow:0 24px 50px -24px rgba(47,107,255,.6)}
+@keyframes pop{from{opacity:0;transform:translateY(20px) scale(.97)}}
+.prod .ph{aspect-ratio:1;overflow:hidden;background:#fff}
+.prod .ph img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.prod:hover .ph img{transform:scale(1.08)}
+.prod .bd{padding:18px;display:flex;flex-direction:column;gap:10px;flex:1}
+.prod small{font-family:"JetBrains Mono";color:var(--cyan);font-size:.75rem;text-transform:uppercase}
+.prod h3{font-size:1.08rem}
+.prod select{background:var(--bg2);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:8px 10px;font:inherit}
+.prod .acts{display:flex;gap:8px;margin-top:auto}
+.prod .acts a,.prod .acts button{flex:1;display:flex;justify-content:center;align-items:center;gap:6px;padding:10px;border-radius:12px;font-weight:700;font-size:.9rem;transition:background .2s}
+.add{background:rgba(47,107,255,.18);color:#c9d8ff}
+.add:hover{background:var(--blue);color:#fff}
+.buy{background:var(--green);color:#04210f}
+.empty{color:var(--muted);padding:40px 0;text-align:center;grid-column:1/-1}
+.more{margin-top:34px;border:1px dashed var(--line);border-radius:var(--r);padding:26px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+
+/* ---------- carrito ---------- */
+.drawer{position:fixed;inset:0;z-index:80;pointer-events:none}
+.drawer .shade{position:absolute;inset:0;background:rgba(0,0,0,.6);opacity:0;transition:opacity .3s}
+.drawer aside{position:absolute;right:0;top:0;bottom:0;width:min(420px,100%);background:var(--bg2);border-left:1px solid var(--line);transform:translateX(100%);transition:transform .35s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column}
+.drawer.open{pointer-events:auto}
+.drawer.open .shade{opacity:1}
+.drawer.open aside{transform:none}
+.drawer header{display:flex;justify-content:space-between;align-items:center;padding:22px;border-bottom:1px solid var(--line)}
+.drawer h3{font-size:1.3rem}
+.items{flex:1;overflow:auto;padding:12px 22px;display:grid;gap:12px;align-content:start}
+.item{display:grid;grid-template-columns:56px 1fr auto;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px}
+.item img{width:56px;height:56px;border-radius:10px;object-fit:cover}
+.item .q{display:flex;align-items:center;gap:8px}
+.item .q button{width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,.08);font-weight:700}
+.drawer footer{padding:22px;border-top:1px solid var(--line);display:grid;gap:10px}
+.drawer footer p{color:var(--muted);font-size:.9rem}
+
+/* ---------- horarios / contacto ---------- */
+.contact{display:grid;grid-template-columns:1fr 1.2fr;gap:30px}
+@media(max-width:900px){.contact{grid-template-columns:1fr}}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-content:start}
+@media(max-width:500px){.cards{grid-template-columns:1fr}}
+.cc{border:1px solid var(--line);background:var(--card);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:6px;transition:border-color .2s,transform .2s}
+a.cc:hover{border-color:var(--cyan);transform:translateY(-3px)}
+.cc .ico{width:28px;height:28px;color:var(--cyan)}
+.cc b{font-family:Montserrat}
+.cc span{color:var(--muted);font-size:.92rem;word-break:break-word}
+.cc.wide{grid-column:1/-1}
+.hours{display:grid;gap:6px;margin-top:6px}
+.hours div{display:flex;justify-content:space-between;color:var(--muted);font-size:.92rem;padding:4px 8px;border-radius:8px}
+.hours div.today{background:rgba(47,107,255,.18);color:var(--text);font-weight:600}
+.map{width:100%;min-height:420px;height:100%;border:1px solid var(--line);border-radius:var(--r);filter:invert(.9) hue-rotate(180deg) saturate(.8)}
+
+footer.site{border-top:1px solid var(--line);padding:36px 0;color:var(--muted);text-align:center;font-size:.9rem}
+
+.fab{position:fixed;right:20px;bottom:20px;z-index:60;width:62px;height:62px;border-radius:50%;background:var(--green);display:grid;place-items:center;color:#fff;box-shadow:0 10px 30px -6px rgba(0,0,0,.6);animation:pg 2.2s infinite}
+.fab .ico{width:32px;height:32px}
+@keyframes pg{0%{box-shadow:0 0 0 0 rgba(37,211,102,.55)}100%{box-shadow:0 0 0 22px transparent}}
+.toast{position:fixed;left:50%;top:84px;z-index:90;white-space:nowrap;transform:translate(-50%,-200px);background:var(--card);border:1px solid var(--cyan);padding:12px 20px;border-radius:14px;font-weight:600;transition:transform .35s}
+.toast.on{transform:translate(-50%,0)}
+
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .8s,transform .8s}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-wa" viewBox="0 0 32 32"><path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.7a10.7 10.7 0 0 1-5.5-1.5l-.4-.2-3.9 1 1-3.8-.2-.4A10.7 10.7 0 1 1 16 26.7zm5.9-8c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7 0a8.8 8.8 0 0 1-4.4-3.8c-.3-.6.3-.5 1-1.7.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.7 3.7 0 0 0-1.1 2.7 6.4 6.4 0 0 0 1.3 3.4 14.7 14.7 0 0 0 5.6 5c2.1.9 2.9 1 4 .8a3.4 3.4 0 0 0 2.2-1.6 2.8 2.8 0 0 0 .2-1.6c-.1-.2-.3-.3-.6-.4z"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 3.9 3.9 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zM12 0C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c.2 4.4 2.6 6.8 7 7 1.2.1 1.6.1 4.9.1s3.7 0 4.9-.1c4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.2-4.4-2.6-6.8-7-7C15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.9 1.4 1.4 0 0 0 0-2.9z"/></symbol>
+  <symbol id="i-fb" viewBox="0 0 24 24"><path d="M24 12a12 12 0 1 0-13.9 11.9v-8.4H7.1V12h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9V12h3.3l-.5 3.5h-2.8v8.4A12 12 0 0 0 24 12z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.3 7 13 7 13s7-7.7 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 10.4 3.5 2.1-.8 1.3L11 13V7h2v5.4z"/></symbol>
+  <symbol id="i-cart" viewBox="0 0 24 24"><path d="M7 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zM7.2 14h9.5c.8 0 1.4-.4 1.8-1l3.6-6.5L20.4 5H5.2l-.9-2H1v2h2l3.6 7.6L5.2 15c-.7 1.3.2 3 1.8 3h12v-2H7.2l1-2z"/></symbol>
+</svg>
+
+<nav id="nav">
+  <div class="wrap">
+    <a href="#" class="brand"><img src="img/logo.jpg" alt="">INFOGROUP</a>
+    <div class="menu">
+      <a href="#servicios">Servicios</a><a href="#catalogo">Catálogo</a><a href="#contacto">Contacto</a>
+    </div>
+    <button class="cart-btn" id="cartBtn" aria-label="Ver mi pedido"><svg class="ico"><use href="#i-cart"/></svg><span class="n" id="cartN">0</span></button>
+  </div>
+</nav>
+
+<header class="hero">
+  <canvas id="circuit" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div>
+      <span class="status" id="status"><i></i><span>Consultando horario…</span></span>
+      <h1>Soluciones <span class="grad">tecnológicas</span> en Carrodilla
+        <span class="type" id="type" aria-hidden="true"></span>
+      </h1>
+      <p>Especialistas en microelectrónica y reparación de hardware de alta gama. Servicio técnico, equipos, accesorios e insumos seleccionados.</p>
+      <div class="ctas">
+        <a class="btn btn-wa" href="https://wa.me/5492615405544?text=Hola%20InfoGroup!%20Quiero%20hacer%20una%20consulta" target="_blank" rel="noopener"><svg class="ico"><use href="#i-wa"/></svg>Escribinos</a>
+        <a class="btn btn-blue" href="#catalogo"><svg class="ico"><use href="#i-cart"/></svg>Ver catálogo</a>
+        <a class="btn btn-ghost" href="#contacto"><svg class="ico"><use href="#i-pin"/></svg>Cómo llegar</a>
+      </div>
+    </div>
+    <div class="chip3d"><div class="inner" id="chip"><div class="glow"></div><img src="img/logo.jpg" alt="Logo de InfoGroup"></div></div>
+  </div>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="track" id="track">
+    <span>PC de escritorio</span><span>Notebooks</span><span>Celulares</span><span>Consolas</span><span>TV y monitores</span><span>Audio</span><span>Microelectrónica</span><span>Accesorios</span><span>Insumos</span>
+  </div>
+</div>
+
+<section id="servicios">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="kicker">Servicio técnico</span>
+      <h2 class="h2">Laboratorio de <span class="grad">electrónica</span></h2>
+      <p class="lead">Diagnóstico preciso y reparación a nivel componente. Calidad y precisión en cada componente.</p>
+    </div>
+    <div class="serv">
+      <div class="tilt reveal"><span class="em">🖥️</span><h3>Laboratorio técnico</h3><p>Reparación de equipos de escritorio, portátiles, móviles y consolas.</p><ul><li>PC torre</li><li>Notebooks</li><li>Celulares</li><li>Consolas</li></ul></div>
+      <div class="tilt reveal"><span class="em">📺</span><h3>Imagen y sonido</h3><p>Diagnóstico y reparación de pantallas y equipos de audio.</p><ul><li>TV</li><li>Monitores</li><li>Equipos de audio</li></ul></div>
+      <div class="tilt reveal"><span class="em">🔬</span><h3>Microelectrónica</h3><p>Reparación de hardware de alta gama a nivel placa, con soldadura de precisión.</p><ul><li>Placas</li><li>Componentes</li><li>Alta gama</li></ul></div>
+      <div class="tilt reveal"><span class="em">🛒</span><h3>Venta</h3><p>Notebooks, PC, accesorios e insumos seleccionados.</p><ul><li>Equipos</li><li>Accesorios</li><li>Insumos</li></ul></div>
+    </div>
+    <div class="banner reveal">
+      <img src="https://images.unsplash.com/photo-1521798604188-0d6595d6d6ae?w=1600&q=80" alt="Técnico soldando una placa electrónica" loading="lazy">
+      <div class="banner-txt">
+        <h3>Servicio<br>técnico</h3>
+        <ul><li>Computadoras / Impresoras</li><li>Teléfonos móviles / Tablets</li><li>TV / Monitores</li><li>Audio / Consolas</li></ul>
+        <small>Laboratorio de electrónica</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap stats reveal">
+    <div class="stat"><b class="grad" data-count="1585">0</b><span>seguidores en Instagram</span></div>
+    <div class="stat"><b class="grad" data-count="11">0</b><span>categorías en catálogo</span></div>
+    <div class="stat"><b class="grad" data-count="6">0</b><span>tipos de equipos reparados</span></div>
+    <div class="stat"><b class="grad" data-count="100" data-suffix="%">0</b><span>atención personalizada</span></div>
+  </div>
+</section>
+
+<section id="catalogo" style="background:linear-gradient(180deg,var(--bg),var(--bg2))">
+  <div class="wrap">
+    <div class="cat-head reveal">
+      <div>
+        <span class="kicker">Catálogo</span>
+        <h2 class="h2">Accesorios <span class="grad">listos para llevar</span></h2>
+        <p class="lead">Armá tu pedido y envialo por WhatsApp. Te respondemos con precio y disponibilidad.</p>
+      </div>
+    </div>
+    <div class="tools">
+      <button class="chip on" data-f="all">Todo</button>
+      <button class="chip" data-f="carga">Carga</button>
+      <button class="chip" data-f="audio">Audio</button>
+      <button class="chip" data-f="almac">Almacenamiento</button>
+      <button class="chip" data-f="celu">Celular</button>
+      <button class="chip" data-f="pc">PC y gaming</button>
+      <input class="search" id="q" type="search" placeholder="Buscar producto…" aria-label="Buscar producto">
+    </div>
+    <div class="grid" id="grid"></div>
+    <div class="more reveal">
+      <div><h3>¿Buscás algo más?</h3><p class="lead" style="font-size:1rem">Notebooks, PC y más productos disponibles. Consultanos.</p></div>
+      <a class="btn btn-wa" href="https://wa.me/5492615405544?text=Hola%20InfoGroup!%20Estoy%20buscando%20" target="_blank" rel="noopener"><svg class="ico"><use href="#i-wa"/></svg>Enviar mensaje</a>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="kicker">Contacto</span>
+      <h2 class="h2">Visitanos en <span class="grad">Carrodilla</span></h2>
+    </div>
+    <div class="contact" style="margin-top:36px">
+      <div class="cards reveal">
+        <a class="cc" href="https://wa.me/5492615405544" target="_blank" rel="noopener"><svg class="ico"><use href="#i-wa"/></svg><b>WhatsApp</b><span>+54 9 261 540-5544</span></a>
+        <a class="cc" href="tel:+5492615405544"><svg class="ico"><use href="#i-phone"/></svg><b>Llamanos</b><span>261 540-5544</span></a>
+        <a class="cc" href="https://www.instagram.com/infogroup_mza/" target="_blank" rel="noopener"><svg class="ico"><use href="#i-ig"/></svg><b>Instagram</b><span>@infogroup_mza</span></a>
+        <a class="cc" href="https://www.facebook.com/infogroup.mza.2025" target="_blank" rel="noopener"><svg class="ico"><use href="#i-fb"/></svg><b>Facebook</b><span>Infogroup Mza</span></a>
+        <a class="cc wide" href="mailto:infogroupmza@gmail.com"><svg class="ico"><use href="#i-mail"/></svg><b>Email</b><span>infogroupmza@gmail.com</span></a>
+        <a class="cc wide" href="https://www.google.com/maps/search/?api=1&query=San+Mart%C3%ADn+7978,+Carrodilla,+Luj%C3%A1n+de+Cuyo,+Mendoza" target="_blank" rel="noopener"><svg class="ico"><use href="#i-pin"/></svg><b>Dirección</b><span>San Martín 7978, Local 2, Carrodilla, Luján de Cuyo, Mendoza</span></a>
+        <div class="cc wide"><svg class="ico"><use href="#i-clock"/></svg><b>Horarios</b><div class="hours" id="hours"></div></div>
+      </div>
+      <iframe class="map reveal" title="Mapa de InfoGroup" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps?q=San+Mart%C3%ADn+7978,+Carrodilla,+Luj%C3%A1n+de+Cuyo,+Mendoza&output=embed"></iframe>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">© InfoGroup · Innovación y tecnología ⚙️ · San Martín 7978 Local 2, Carrodilla, Mendoza</div>
+</footer>
+
+<div class="drawer" id="drawer">
+  <div class="shade" data-close></div>
+  <aside aria-label="Mi pedido">
+    <header><h3>Mi pedido</h3><button data-close aria-label="Cerrar" style="font-size:1.6rem">×</button></header>
+    <div class="items" id="items"></div>
+    <footer>
+      <p>Te respondemos por WhatsApp con precios y disponibilidad.</p>
+      <a class="btn btn-wa" id="send" target="_blank" rel="noopener" style="justify-content:center"><svg class="ico"><use href="#i-wa"/></svg>Enviar pedido por WhatsApp</a>
+    </footer>
+  </aside>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<a class="fab" href="https://wa.me/5492615405544" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp"><svg class="ico"><use href="#i-wa"/></svg></a>
+
+<script>
+const WA = '5492615405544';
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// ---------- horarios ----------
+// ponytail: solo se conoce el horario del miércoles; se asume lunes a viernes igual. Editar acá si cambia.
+const SCHEDULE = {1:[[9,13],[16.5,19.5]],2:[[9,13],[16.5,19.5]],3:[[9,13],[16.5,19.5]],4:[[9,13],[16.5,19.5]],5:[[9,13],[16.5,19.5]]};
+const DAYS = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+const fmt = h => `${String(Math.floor(h)).padStart(2,'0')}:${h % 1 ? '30' : '00'}`;
+(() => {
+  const now = new Date(), d = now.getDay(), h = now.getHours() + now.getMinutes() / 60;
+  const open = (SCHEDULE[d] || []).some(([a, b]) => h >= a && h < b);
+  const st = document.getElementById('status');
+  st.classList.add(open ? 'open' : 'closed');
+  st.querySelector('span').textContent = open ? 'Abierto ahora' : 'Cerrado ahora · escribinos igual';
+  document.getElementById('hours').innerHTML = [1,2,3,4,5,6,0].map(i =>
+    `<div class="${i === d ? 'today' : ''}"><span>${DAYS[i]}</span><span>${SCHEDULE[i] ? SCHEDULE[i].map(([a,b]) => fmt(a)+' – '+fmt(b)).join(' / ') : 'Cerrado'}</span></div>`).join('');
+})();
+
+// ---------- catalogo ----------
+const PRODUCTS = [
+  {id:'memoria', name:'Memoria micro SD', cat:'almac', img:'https://images.unsplash.com/photo-1499336969384-ebe67b79faa8?w=600&h=600&fit=crop&q=80', opts:['32 GB','64 GB','128 GB']},
+  {id:'pendrive', name:'Pendrive', cat:'almac', img:'https://images.unsplash.com/photo-1587145820098-23e484e69816?w=600&h=600&fit=crop&q=80', opts:['32 GB','64 GB','128 GB']},
+  {id:'cabezal-cable', name:'Cabezal + cable', cat:'carga', img:'https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=600&h=600&fit=crop&q=80'},
+  {id:'cables', name:'Cables Lightning y Tipo C', cat:'carga', img:'https://images.unsplash.com/photo-1572721546624-05bf65ad7679?w=600&h=600&fit=crop&q=80', opts:['Lightning','Tipo C']},
+  {id:'cabezal-usb', name:'Cabezales USB / Tipo C', cat:'carga', img:'https://images.unsplash.com/photo-1725304382197-663ae3864750?w=600&h=600&fit=crop&q=80', opts:['USB','Tipo C']},
+  {id:'fundas', name:'Fundas', cat:'celu', img:'https://images.unsplash.com/photo-1535157412991-2ef801c1748b?w=600&h=600&fit=crop&q=80'},
+  {id:'templados', name:'Templados', cat:'celu', img:'https://images.unsplash.com/photo-1746006084492-24a8fd02710a?w=600&h=600&fit=crop&q=80'},
+  {id:'auris-cable', name:'Auriculares con cable', cat:'audio', img:'https://images.unsplash.com/photo-1742570922875-e5a60e950307?w=600&h=600&fit=crop&q=80'},
+  {id:'auris-bt', name:'Auriculares Bluetooth', cat:'audio', img:'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600&h=600&fit=crop&q=80'},
+  {id:'teclados', name:'Teclados', cat:'pc', img:'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=600&h=600&fit=crop&q=80'},
+  {id:'joysticks', name:'Joysticks', cat:'pc', img:'https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=600&h=600&fit=crop&q=80'},
+];
+const CATS = {carga:'Carga', audio:'Audio', almac:'Almacenamiento', celu:'Celular', pc:'PC y gaming'};
+const waLink = text => `https://wa.me/${WA}?text=${encodeURIComponent(text)}`;
+const grid = document.getElementById('grid');
+let filter = 'all', query = '';
+
+function render() {
+  const list = PRODUCTS.filter(p => (filter === 'all' || p.cat === filter) && p.name.toLowerCase().includes(query));
+  grid.innerHTML = list.length ? list.map((p, i) => `
+    <article class="prod" style="animation-delay:${i * 50}ms">
+      <div class="ph"><img src="${p.img}" alt="${p.name}" loading="lazy"></div>
+      <div class="bd">
+        <small>${CATS[p.cat]}</small>
+        <h3>${p.name}</h3>
+        ${p.opts ? `<select data-opt="${p.id}" aria-label="Opción de ${p.name}">${p.opts.map(o => `<option>${o}</option>`).join('')}</select>` : ''}
+        <div class="acts">
+          <button class="add" data-add="${p.id}">+ Agregar</button>
+          <a class="buy" data-buy="${p.id}" href="${waLink('Hola InfoGroup! Quiero comprar: ' + p.name + (p.opts ? ' (' + p.opts[0] + ')' : ''))}" target="_blank" rel="noopener">Comprar</a>
+        </div>
+      </div>
+    </article>`).join('') : '<p class="empty">No encontramos ese producto. ¡Consultanos por WhatsApp!</p>';
+}
+render();
+
+const optOf = id => grid.querySelector(`[data-opt="${id}"]`)?.value;
+grid.addEventListener('change', e => {
+  const id = e.target.dataset.opt; if (!id) return;
+  const p = PRODUCTS.find(x => x.id === id);
+  grid.querySelector(`[data-buy="${id}"]`).href = waLink(`Hola InfoGroup! Quiero comprar: ${p.name} (${e.target.value})`);
+});
+document.querySelectorAll('.chip').forEach(c => c.onclick = () => {
+  document.querySelector('.chip.on').classList.remove('on');
+  c.classList.add('on'); filter = c.dataset.f; render();
+});
+document.getElementById('q').oninput = e => { query = e.target.value.trim().toLowerCase(); render(); };
+
+// ---------- pedido (carrito) ----------
+const cart = new Map(); // key -> {p, opt, qty}
+const $n = document.getElementById('cartN'), $items = document.getElementById('items'), $send = document.getElementById('send');
+const drawer = document.getElementById('drawer'), toast = document.getElementById('toast');
+
+function drawCart() {
+  const total = [...cart.values()].reduce((s, x) => s + x.qty, 0);
+  $n.textContent = total; $n.classList.toggle('on', total > 0);
+  $items.innerHTML = cart.size ? [...cart].map(([k, x]) => `
+    <div class="item"><img src="${x.p.img}" alt="">
+      <div><b>${x.p.name}</b>${x.opt ? `<br><small style="color:var(--muted)">${x.opt}</small>` : ''}</div>
+      <div class="q"><button data-dec="${k}" aria-label="Quitar uno">−</button>${x.qty}<button data-inc="${k}" aria-label="Agregar uno">+</button></div>
+    </div>`).join('') : '<p style="color:var(--muted);padding:20px 0">Todavía no agregaste productos.</p>';
+  const lines = [...cart.values()].map(x => `• ${x.qty} x ${x.p.name}${x.opt ? ' (' + x.opt + ')' : ''}`);
+  $send.href = waLink(`Hola InfoGroup! Quiero hacer este pedido:\n${lines.join('\n')}\n\n¿Me pasan precio y disponibilidad?`);
+  $send.style.opacity = cart.size ? 1 : .4;
+  $send.style.pointerEvents = cart.size ? 'auto' : 'none';
+}
+drawCart();
+
+grid.addEventListener('click', e => {
+  const id = e.target.dataset.add; if (!id) return;
+  const p = PRODUCTS.find(x => x.id === id), opt = optOf(id), key = id + '|' + (opt || '');
+  const cur = cart.get(key) || {p, opt, qty: 0};
+  cur.qty++; cart.set(key, cur); drawCart();
+  const btn = document.getElementById('cartBtn');
+  btn.classList.remove('bump'); void btn.offsetWidth; btn.classList.add('bump');
+  toast.textContent = `✓ ${p.name}${opt ? ' ' + opt : ''} agregado`;
+  toast.classList.add('on'); clearTimeout(toast.t); toast.t = setTimeout(() => toast.classList.remove('on'), 1800);
+});
+$items.addEventListener('click', e => {
+  const k = e.target.dataset.inc || e.target.dataset.dec; if (!k) return;
+  const x = cart.get(k); x.qty += e.target.dataset.inc ? 1 : -1;
+  if (x.qty <= 0) cart.delete(k);
+  drawCart();
+});
+document.getElementById('cartBtn').onclick = () => drawer.classList.add('open');
+drawer.addEventListener('click', e => { if ('close' in e.target.dataset) drawer.classList.remove('open'); });
+addEventListener('keydown', e => { if (e.key === 'Escape') drawer.classList.remove('open'); });
+
+// ---------- efectos ----------
+const nav = document.getElementById('nav');
+addEventListener('scroll', () => nav.classList.toggle('solid', scrollY > 40), {passive: true});
+
+const track = document.getElementById('track');
+track.innerHTML += track.innerHTML;
+
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+}), {threshold: .12});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+const cio = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  const el = e.target, end = +el.dataset.count, suf = el.dataset.suffix || '', t0 = performance.now();
+  const step = t => {
+    const p = reduce ? 1 : Math.min((t - t0) / 1600, 1);
+    el.textContent = Math.round(end * (1 - (1 - p) ** 3)).toLocaleString('es-AR') + suf;
+    if (p < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step); cio.unobserve(el);
+}), {threshold: .6});
+document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
+
+// maquina de escribir
+const words = ['Reparamos tu PC.', 'Reparamos tu notebook.', 'Reparamos tu celular.', 'Reparamos tu consola.', 'Accesorios al toque.'];
+const $type = document.getElementById('type');
+if (reduce) $type.textContent = words[0];
+else (async () => {
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  for (let i = 0; ; i = (i + 1) % words.length) {
+    for (const ch of words[i]) { $type.textContent += ch; await wait(55); }
+    await wait(1600);
+    while ($type.textContent) { $type.textContent = $type.textContent.slice(0, -1); await wait(25); }
+  }
+})();
+
+// inclinacion 3D en tarjetas y logo
+if (!reduce && matchMedia('(pointer:fine)').matches) {
+  document.querySelectorAll('.tilt').forEach(c => {
+    c.addEventListener('mousemove', e => {
+      const r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      c.style.transform = `perspective(700px) rotateX(${(.5 - y) * 10}deg) rotateY(${(x - .5) * 10}deg)`;
+      c.style.setProperty('--mx', x * 100 + '%'); c.style.setProperty('--my', y * 100 + '%');
+    });
+    c.addEventListener('mouseleave', () => c.style.transform = '');
+  });
+  const chip = document.getElementById('chip');
+  addEventListener('mousemove', e => {
+    const x = e.clientX / innerWidth - .5, y = e.clientY / innerHeight - .5;
+    chip.style.transform = `rotateY(${x * 22}deg) rotateX(${-y * 22}deg)`;
+  });
+}
+
+// fondo de circuito: pulsos de luz viajando por pistas
+(() => {
+  const cv = document.getElementById('circuit'), ctx = cv.getContext('2d');
+  const G = 46; let W, H, traces = [], pulses = [];
+  function build() {
+    W = cv.width = cv.offsetWidth * devicePixelRatio; H = cv.height = cv.offsetHeight * devicePixelRatio;
+    ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+    const w = cv.offsetWidth, h = cv.offsetHeight;
+    traces = Array.from({length: Math.round(w * h / 22000)}, () => {
+      let x = Math.round(Math.random() * w / G) * G, y = Math.round(Math.random() * h / G) * G;
+      const pts = [[x, y]];
+      for (let s = 0; s < 4; s++) {
+        const len = G * (1 + Math.floor(Math.random() * 3));
+        s % 2 ? y += len * (Math.random() < .5 ? -1 : 1) : x += len * (Math.random() < .5 ? -1 : 1);
+        pts.push([x, y]);
+      }
+      return pts;
+    });
+    pulses = traces.map(t => ({t, p: Math.random(), v: .002 + Math.random() * .004}));
+  }
+  const along = (pts, p) => {
+    const segs = pts.slice(1).map((q, i) => Math.hypot(q[0] - pts[i][0], q[1] - pts[i][1]));
+    let d = p * segs.reduce((a, b) => a + b, 0);
+    for (let i = 0; i < segs.length; i++) {
+      if (d <= segs[i]) { const k = d / segs[i]; return [pts[i][0] + (pts[i + 1][0] - pts[i][0]) * k, pts[i][1] + (pts[i + 1][1] - pts[i][1]) * k]; }
+      d -= segs[i];
+    }
+    return pts[pts.length - 1];
+  };
+  function frame() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.lineWidth = 1.2; ctx.strokeStyle = 'rgba(47,107,255,.16)';
+    for (const t of traces) {
+      ctx.beginPath(); t.forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)); ctx.stroke();
+      ctx.fillStyle = 'rgba(58,215,255,.35)';
+      ctx.beginPath(); ctx.arc(...t[t.length - 1], 3, 0, 7); ctx.fill();
+    }
+    for (const pu of pulses) {
+      pu.p = (pu.p + pu.v) % 1;
+      const [x, y] = along(pu.t, pu.p);
+      const g = ctx.createRadialGradient(x, y, 0, x, y, 10);
+      g.addColorStop(0, 'rgba(58,215,255,.95)'); g.addColorStop(1, 'rgba(58,215,255,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, 10, 0, 7); ctx.fill();
+    }
+    if (!reduce) requestAnimationFrame(frame);
+  }
+  build(); frame();
+  addEventListener('resize', () => { build(); if (reduce) frame(); });
+})();
+</script>
+</body>
+</html>
